@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:new_chilla/design.dart';
 
 class Signup extends StatefulWidget {
@@ -15,6 +17,7 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
@@ -35,36 +38,61 @@ class _SignupState extends State<Signup> {
                                 .textTheme
                                 .headlineLarge
                                 ?.copyWith(
-                                  color: Colors.greenAccent,
+                                  color: Color(0xFF57CC99),
+                                  fontFamily:
+                                      GoogleFonts.anekGurmukhi().fontFamily,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 40.0,
                                 ),
                           ),
                         ),
                         const SizedBox(height: 30),
                         _buildLabelText(context, "User Name"),
-                        const SizedBox(height: 8),
-                        _buildProjectedTextFormField(false),
+                        const SizedBox(height: 2),
+                        _buildProjectedTextFormField(isPassword: false),
                         const SizedBox(height: 20),
                         _buildLabelText(context, "Email"),
-                        const SizedBox(height: 8),
-                        _buildProjectedTextFormField(false),
+                        const SizedBox(height: 2),
+                        _buildProjectedTextFormField(isPassword: false),
                         const SizedBox(height: 20),
-                        _buildLabelText(context, "Password"),
-                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildLabelText(context, "Password"),
+                            IconButton(
+                              icon: Icon(
+                                color: Color(0xFF838181),
+                                _isPasswordVisible
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _isPasswordVisible = !_isPasswordVisible;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 2),
                         _buildPasswordField(),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 40),
                         Center(
                           child: SizedBox(
                             height: 48.0,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.greenAccent,
+                                backgroundColor: Color(0xFF57CC99),
                               ),
-                              onPressed: () {},
-                              child: const Text(
+                              onPressed: () {
+                                // Handle sign up logic
+                              },
+                              child: Text(
                                 "Sign Up",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 25,
+                                  fontFamily: GoogleFonts.signika().fontFamily,
                                 ),
                               ),
                             ),
@@ -75,14 +103,14 @@ class _SignupState extends State<Signup> {
                   ),
                 ),
                 SizedBox(
-                  height: constraints.maxHeight - 525,
+                  height: constraints.maxHeight - 400,
                   child: Stack(
                     children: [
                       ClipPath(
                         clipper: BottomWaveClipper(),
                         child: Container(
                           width: double.infinity,
-                          color: Colors.greenAccent,
+                          color: Color(0xFFC7F9DE),
                         ),
                       ),
                       Positioned(
@@ -92,8 +120,7 @@ class _SignupState extends State<Signup> {
                         child: Image.asset(
                           'assets/image.png',
                           height: 300,
-                          fit: BoxFit.cover,
-                          //fit: BoxFit.contain,
+                          fit: BoxFit.contain,
                         ),
                       ),
                       Positioned(
@@ -110,15 +137,19 @@ class _SignupState extends State<Signup> {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.white,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    // Handle Google sign-in logic
+                                  },
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      const Text(
+                                      Text(
                                         "Sign in with ",
                                         style: TextStyle(
-                                          color: Colors.greenAccent,
+                                          color: const Color(0xFF57CC99),
                                           fontSize: 20,
+                                          fontFamily:
+                                              GoogleFonts.signika().fontFamily,
                                         ),
                                       ),
                                       const SizedBox(width: 8),
@@ -132,11 +163,30 @@ class _SignupState extends State<Signup> {
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              const Text(
-                                'Already have an account? Sign in',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
+                              RichText(
+                                text: TextSpan(
+                                  text: 'Already have an account? ',
+                                  style: TextStyle(
+                                    color: const Color(0xFF38A3A5),
+                                    fontSize: 18,
+                                    fontFamily:
+                                        GoogleFonts.robotoFlex().fontFamily,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: 'Sign in',
+                                      style: TextStyle(
+                                        color: const Color(0xFF296685),
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily:
+                                            GoogleFonts.robotoFlex().fontFamily,
+                                      ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          // Handle sign-in tap logic here
+                                        },
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -159,12 +209,16 @@ class _SignupState extends State<Signup> {
       padding: const EdgeInsets.symmetric(horizontal: 45.0),
       child: Text(
         labelText,
-        style: Theme.of(context).textTheme.bodyLarge,
+        style: TextStyle(
+          color: Color(0xFF838181),
+          fontSize: 16,
+          fontFamily: GoogleFonts.roboto().fontFamily,
+        ),
       ),
     );
   }
 
-  Widget _buildProjectedTextFormField(bool isPassword) {
+  Widget _buildProjectedTextFormField({required bool isPassword}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 45.0),
       child: Container(
@@ -180,25 +234,13 @@ class _SignupState extends State<Signup> {
           ],
         ),
         child: TextFormField(
+          cursorColor: Color(0xFF838181),
           obscureText: isPassword ? !_isPasswordVisible : false,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             border: InputBorder.none,
+            fillColor: Colors.red,
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-            suffixIcon: isPassword
-                ? IconButton(
-                    icon: Icon(
-                      _isPasswordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
-                  )
-                : null,
+                EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
           ),
         ),
       ),
@@ -206,6 +248,6 @@ class _SignupState extends State<Signup> {
   }
 
   Widget _buildPasswordField() {
-    return _buildProjectedTextFormField(true);
+    return _buildProjectedTextFormField(isPassword: true);
   }
 }
