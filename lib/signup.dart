@@ -84,9 +84,7 @@ class _SignupState extends State<Signup> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Color(0xFF57CC99),
                               ),
-                              onPressed: () {
-                                // Handle sign up logic
-                              },
+                              onPressed: () {},
                               child: Text(
                                 "Sign Up",
                                 style: TextStyle(
@@ -137,9 +135,7 @@ class _SignupState extends State<Signup> {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.white,
                                   ),
-                                  onPressed: () {
-                                    // Handle Google sign-in logic
-                                  },
+                                  onPressed: () {},
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -182,9 +178,7 @@ class _SignupState extends State<Signup> {
                                             GoogleFonts.robotoFlex().fontFamily,
                                       ),
                                       recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          // Handle sign-in tap logic here
-                                        },
+                                        ..onTap = () {},
                                     ),
                                   ],
                                 ),
