@@ -200,7 +200,7 @@ class _SignupState extends State<Signup> {
 
   Widget _buildLabelText(BuildContext context, String labelText) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 45.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Text(
         labelText,
         style: TextStyle(
@@ -214,7 +214,7 @@ class _SignupState extends State<Signup> {
 
   Widget _buildProjectedTextFormField({required bool isPassword}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 45.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
